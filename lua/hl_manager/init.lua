@@ -198,7 +198,10 @@ end
 local function highlight_link_au(from_highlight, to_highlight)
 	vim.api.nvim_create_autocmd("ColorScheme", {
 		pattern = "*",
-		command = 'highlight! link '..from_highlight..' '..to_highlight,
+        callback = function()
+          vim.api.nvim_set_hl(0, from_highlight, { link = to_highlight })
+        end,
+        -- command = 'highlight! link '..from_highlight..' '..to_highlight,
 		group = theme_change_au,
 	})
 end
